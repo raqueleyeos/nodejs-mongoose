@@ -1,9 +1,9 @@
 class Book {
 
-    constructor(id, name, author, pages, publisher)
+    constructor(id, title, author, pages, publisher)
     {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.author = author;
         this.pages = pages;
         this.publisher = publisher;
@@ -16,7 +16,7 @@ class Book {
 
     getName()
     {
-        return this.name;
+        return this.title;
     }
 
     getAuthor()

@@ -9,7 +9,7 @@ module.exports.transformArrayToObjectMongo = function(data)
 {
     return [{
         id : data['id'],
-        name : data['name'],
+        title : data['title'],
         author : data['author'],
         pages : data['pages'],
         publisher : data['publisher']

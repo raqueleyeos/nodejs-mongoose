@@ -46,8 +46,26 @@ class BookRepository {
                 return;
             }
             callback(null, books);
-        });
+        }).limit(10);
     }
+
+
+    /**
+     *
+     * @param callback
+     */
+    findAvailableBooks(callback)
+    {
+        callback(new Error('TODO'), null);
+        // BookModel.find({}, function (err, books) {
+        //     if (err || books.length == 0) {
+        //         callback(new Error('Book Not Found'), null);
+        //         return;
+        //     }
+        //     callback(null, books);
+        // }).limit(10);
+    }
+
 
     /**
      * @param array data
@@ -59,6 +77,28 @@ class BookRepository {
         BookModel.create(bookToRegistry, function(err) {
             if (err) {
                 callback(new Error('Book not stored'), null);
+                return;
+            }
+            callback(null, true);
+        });
+    }
+
+    update(data, callback)
+    {
+        BookModel.findOneAndUpdate({id: data.id}, data.body, function (err) {
+            if (err) {
+                callback(new Error('Book not updated'), null);
+                return;
+            }
+            callback(null, true);
+        });
+    }
+
+    delete(idBook, callback)
+    {
+        BookModel.remove({id: idBook}, function(err) {
+            if (err) {
+                callback(new Error('Book not deleted'), null);
                 return;
             }
             callback(null, true);
