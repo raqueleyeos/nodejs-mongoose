@@ -83,6 +83,10 @@ class BookRepository {
         });
     }
 
+    /**
+     * @param data
+     * @param callback
+     */
     update(data, callback)
     {
         BookModel.findOneAndUpdate({id: data.id}, data.body, function (err) {
@@ -94,6 +98,10 @@ class BookRepository {
         });
     }
 
+    /**
+     * @param idBook
+     * @param callback
+     */
     delete(idBook, callback)
     {
         BookModel.remove({id: idBook}, function(err) {
