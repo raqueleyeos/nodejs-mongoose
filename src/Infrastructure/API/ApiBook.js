@@ -77,8 +77,6 @@ module.exports = function(api) {
     });
 
 
-
-
     /**
      * Update a book
      */
