@@ -15,7 +15,7 @@ api.use(bodyParser.json());
 /**
  *  ENDPOINTS
  */
-require('src/Infrastructure/API/ApiBook')(api);
-require('src/Infrastructure/API/ApiReserve')(api);
+require('src/Infrastructure/Routing/ApiBook')(api);
+require('src/Infrastructure/Routing/ApiReserve')(api);
 
 module.exports = api;

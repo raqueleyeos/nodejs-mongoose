@@ -102,9 +102,9 @@ class BookRepository {
      * @param idBook
      * @param callback
      */
-    delete(idBook, callback)
+    delete(id, callback)
     {
-        BookModel.remove({id: idBook}, function(err) {
+        BookModel.remove({id: id}, function(err) {
             if (err) {
                 callback(new Error('Book not deleted'), null);
                 return;
