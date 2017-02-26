@@ -1,4 +1,4 @@
-const ReservationRepository = require('src/Infrastructure/Persistence/Mongodb/ReservationRepository');
+const BookRepository = require('src/Infrastructure/Persistence/Mongodb/BookRepository');
 
 module.exports = function(data, callback){
     if (!verifyRequestData(data.body)) {
@@ -6,18 +6,21 @@ module.exports = function(data, callback){
         return;
     }
 
-    var reservationRepository = new ReservationRepository();
-    reservationRepository.update(data, callback);
-    reservationRepository.close();
+    var bookRepository = new BookRepository();
+    bookRepository.updateReservation(data, callback);
+    bookRepository.close();
 };
 
 function verifyRequestData(data)
 {
     if (data['id'] === undefined) return false;
-    if (data['bookId'] === undefined) return false;
-    if (data['reservationDate'] === undefined) return false;
-    if (data['expirationDate'] === undefined) return false;
-    if (data['active'] === undefined) return false;
+    if (data['title'] === undefined) return false;
+    if (data['author'] === undefined) return false;
+    if (data['pages'] === undefined) return false;
+    if (data['publisher'] === undefined) return false;
+
+    if (data['reservation']['reservationDate'] === undefined) return false;
+    if (data['reservation']['expirationDate'] === undefined) return false;
 
     return true;
 }

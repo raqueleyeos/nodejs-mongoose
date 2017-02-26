@@ -1,15 +1,15 @@
-const ReservationRepository = require('src/Infrastructure/Persistence/Mongodb/ReservationRepository');
+const BookRepository = require('src/Infrastructure/Persistence/Mongodb/BookRepository');
 
-module.exports = function(idReservation, callback){
+module.exports = function(bookId, callback){
 
-    if (!verifyRequestData(idReservation)) {
+    if (!verifyRequestData(bookId)) {
         callback(new TypeError('Invalid Argument'), null);
         return;
     }
 
-    var reservationRepository = new ReservationRepository();
-    reservationRepository.delete(idReservation, callback);
-    reservationRepository.close();
+    var bookRepository = new BookRepository();
+    bookRepository.deleteReservation(bookId, callback);
+    bookRepository.close();
 };
 
 function verifyRequestData(idReservation)

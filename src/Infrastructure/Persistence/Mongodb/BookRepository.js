@@ -30,6 +30,7 @@ class BookRepository {
                callback(new Error('Book Not Found'), null);
                return;
             }
+
             var bookModel = BookRespositoryFactory.transformObjectToBook(book[0]);
             callback(null, bookModel);
         });
@@ -56,14 +57,60 @@ class BookRepository {
      */
     findAvailableBooks(callback)
     {
-        callback(new Error('TODO'), null);
-        // BookModel.find({}, function (err, books) {
-        //     if (err || books.length == 0) {
-        //         callback(new Error('Book Not Found'), null);
-        //         return;
-        //     }
-        //     callback(null, books);
-        // }).limit(10);
+        BookModel.find({ reservation: {$exists: false}}, function (err, books) {
+            if (err || books.length == 0) {
+                callback(new Error('Book Not Found'), null);
+                return;
+            }
+            callback(null, books);
+        }).limit(10);
+    }
+
+    /**
+     * @param data
+     * @param callback
+     */
+    addReservation(data, callback)
+    {
+        BookModel.findOneAndUpdate({id: data.id}, data, function (err, book) {
+            if (err) {
+                callback(new Error('Book not updated'), null);
+                return;
+            }
+
+            callback(null, true);
+        });
+    }
+
+    /**
+     * @param data
+     * @param callback
+     */
+    updateReservation(data, callback)
+    {
+        BookModel.findOneAndUpdate({id: data.id}, data.body, function (err, book) {
+            if (err) {
+                callback(new Error('Book not updated'), null);
+                return;
+            }
+
+            callback(null, true);
+        });
+    }
+
+    /**
+     * @param idBook
+     * @param callback
+     */
+    deleteReservation(bookId, callback)
+    {
+        BookModel.findOneAndUpdate({id: bookId}, {$unset: {reservation: 1 }}, function (err) {
+            if (err) {
+                callback(new Error('Book not updated'), null);
+                return;
+            }
+            callback(null, true);
+        });
     }
 
 

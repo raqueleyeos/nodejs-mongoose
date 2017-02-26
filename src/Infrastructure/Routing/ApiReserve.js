@@ -20,7 +20,6 @@ module.exports = function(api) {
 
            res.json(reservation);
         });
-
     });
 
     /**
@@ -59,43 +58,6 @@ module.exports = function(api) {
             }
             res.json(reservation);
         })
-    });
-
-
-    /**
-     * Find a reservation
-     */
-    api.get('/reserve/book/:id', function(req, res) {
-
-        let idReservation = req.params.id;
-
-        let FindReservationById = require('src/Application/Reservation/Find/FindReservationById');
-
-        FindReservationById(idReservation, (err, reservation) => {
-           if (err) {
-               res.status(404).json(err.message);
-               return;
-           }
-
-           res.json(reservation);
-        });
-    });
-
-    /**
-     * List all reservations
-     */
-    api.get('/reserves/book/', function(req, res) {
-
-        let FindReservations = require('src/Application/Reservation/Find/FindReservations');
-
-        FindReservations((err, reservations) => {
-            if (err) {
-                res.status(404).json(err.message);
-                return;
-            }
-
-            res.json(reservations);
-        });
     });
 
 }

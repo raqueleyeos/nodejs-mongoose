@@ -23,6 +23,14 @@ const bookSchema = new Schema({
         publisher: {
             type: String,
             required: true
+        },
+        reservation: {
+            reservationDate: {
+                type: Date
+            },
+            expirationDate: {
+                type: Date
+            }
         }
     },
     {

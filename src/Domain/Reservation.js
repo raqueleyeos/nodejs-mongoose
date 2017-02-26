@@ -1,21 +1,10 @@
 
 class Reservation {
 
-    constructor(id, bookId, reservationDate, expirationDate, active) {
+    constructor(reservationDate, expirationDate) {
 
-        this.id = id;
-        this.bookId = bookId;
         this.reservationDate = reservationDate;
         this.expirationDate = expirationDate;
-        this.active = active;
-    }
-
-    getId() {
-        return this.id;
-    }
-
-    getBookId() {
-        return this.bookId;
     }
 
     getReservationDate() {
@@ -24,10 +13,6 @@ class Reservation {
 
     getExpirationDate() {
         return this.expirationDate;
-    }
-
-    getActive() {
-        return this.active;
     }
 }
 
