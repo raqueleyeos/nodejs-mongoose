@@ -8,16 +8,17 @@ module.exports = function(data, callback){
 
     var bookRepository = new BookRepository();
     bookRepository.save(data, callback);
-    bookRepository.close();
 };
 
 function verifyRequestData(data)
 {
-    if (data['id'] === undefined) return false;
-    if (data['name'] === undefined) return false;
-    if (data['author'] === undefined) return false;
-    if (data['pages'] === undefined) return false;
-    if (data['publisher'] === undefined) return false;
+    let attributes = ['id', 'name', 'author', 'pages', 'publisher'];
+
+    for (let attribute of attributes) {
+        if (typeof data['attribute'] === 'undefined') {
+            return false;
+        }
+    }
 
     return true;
 }
