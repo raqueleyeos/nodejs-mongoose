@@ -1,4 +1,5 @@
 const Book = require('src/Domain/Book');
+const Reservation = require('src/Domain/Reservation');
 
 /**
  * @param array data
@@ -7,12 +8,17 @@ const Book = require('src/Domain/Book');
  */
 module.exports.transformArrayToObjectMongo = function(data)
 {
+    console.log('hola', data);
     return [{
         id : data['id'],
-        name : data['name'],
+        title : data['title'],
         author : data['author'],
         pages : data['pages'],
-        publisher : data['publisher']
+        publisher : data['publisher'],
+        reservation : [{
+            reservationDate: data['reservationDate'],
+            expirationDate: data['expirationDate']
+        }]
     }];
 };
 
@@ -28,6 +34,10 @@ module.exports.transformObjectToBook = function(data)
         data.title,
         data.author,
         data.pages,
-        data.publisher
+        data.publisher,
+        new Reservation(
+            data.reservation.reservationDate,
+            data.reservation.expirationDate
+        )
     );
 };

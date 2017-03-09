@@ -1,12 +1,13 @@
 class Book {
 
-    constructor(id, name, author, pages, publisher)
+    constructor(id, title, author, pages, publisher, reservation)
     {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.author = author;
         this.pages = pages;
         this.publisher = publisher;
+        this.reservation = reservation;
     }
 
     getId()
@@ -16,7 +17,7 @@ class Book {
 
     getName()
     {
-        return this.name;
+        return this.title;
     }
 
     getAuthor()
@@ -32,6 +33,11 @@ class Book {
     getPublisher()
     {
         return this.publisher;
+    }
+
+    getReservation()
+    {
+        return this.reservation;
     }
 }
 

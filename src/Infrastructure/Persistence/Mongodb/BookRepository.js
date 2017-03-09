@@ -26,6 +26,7 @@ class BookRepository {
                callback(new Error('Book Not Found'), null);
                return;
             }
+
             var bookModel = BookRespositoryFactory.transformObjectToBook(book[0]);
             BookRepository.close();
             callback(null, bookModel);
@@ -44,8 +45,74 @@ class BookRepository {
             }
             BookRepository.close();
             callback(null, books);
+        }).limit(10);
+    }
+
+
+    /**
+     *
+     * @param callback
+     */
+    findAvailableBooks(callback)
+    {
+        BookModel.find({ reservation: {$exists: false}}, function (err, books) {
+            if (err || books.length == 0) {
+                callback(new Error('Book Not Found'), null);
+                return;
+            }
+            BookRepository.close();
+            callback(null, books);
+        }).limit(10);
+    }
+
+    /**
+     * @param data
+     * @param callback
+     */
+    addReservation(data, callback)
+    {
+        BookModel.findOneAndUpdate({id: data.id}, data, function (err, book) {
+            if (err) {
+                callback(new Error('Book not updated'), null);
+                return;
+            }
+            BookRepository.close();
+            callback(null, true);
         });
     }
+
+    /**
+     * @param data
+     * @param callback
+     */
+    updateReservation(data, callback)
+    {
+        BookModel.findOneAndUpdate({id: data.id}, data.body, function (err, book) {
+            if (err) {
+                callback(new Error('Book not updated'), null);
+                return;
+            }
+            BookRepository.close();
+            callback(null, true);
+        });
+    }
+
+    /**
+     * @param idBook
+     * @param callback
+     */
+    deleteReservation(bookId, callback)
+    {
+        BookModel.findOneAndUpdate({id: bookId}, {$unset: {reservation: 1 }}, function (err) {
+            if (err) {
+                callback(new Error('Book not updated'), null);
+                return;
+            }
+            BookRepository.close();
+            callback(null, true);
+        });
+    }
+
 
     /**
      * @param data
@@ -57,6 +124,38 @@ class BookRepository {
         BookModel.create(bookToRegistry, function(err) {
             if (err) {
                 callback(new Error('Book not stored'), null);
+                return;
+            }
+            BookRepository.close();
+            callback(null, true);
+        });
+    }
+
+    /**
+     * @param data
+     * @param callback
+     */
+    update(data, callback)
+    {
+        BookModel.findOneAndUpdate({id: data.id}, data.body, function (err) {
+            if (err) {
+                callback(new Error('Book not updated'), null);
+                return;
+            }
+            BookRepository.close();
+            callback(null, true);
+        });
+    }
+
+    /**
+     * @param idBook
+     * @param callback
+     */
+    delete(id, callback)
+    {
+        BookModel.remove({id: id}, function(err) {
+            if (err) {
+                callback(new Error('Book not deleted'), null);
                 return;
             }
             BookRepository.close();
