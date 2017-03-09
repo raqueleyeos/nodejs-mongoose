@@ -9,7 +9,6 @@ module.exports = function(idBook, callback){
 
     var bookRepository = new BookRepository();
     bookRepository.delete(idBook, callback);
-    bookRepository.close();
 };
 
 function verifyRequestData(idBook)
