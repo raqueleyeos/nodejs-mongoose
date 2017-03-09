@@ -8,7 +8,6 @@ module.exports = function(data, callback){
 
     var bookRepository = new BookRepository();
     bookRepository.updateReservation(data, callback);
-    bookRepository.close();
 };
 
 function verifyRequestData(data)
