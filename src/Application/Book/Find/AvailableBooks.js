@@ -4,5 +4,4 @@ module.exports = function(callback){
 
     var bookRepository = new BookRepository();
     bookRepository.findAvailableBooks(callback);
-    bookRepository.close();
 };
