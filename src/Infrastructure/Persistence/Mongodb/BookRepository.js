@@ -11,16 +11,12 @@ class BookRepository {
         mongoose.connect(settings.mongodb.url + settings.mongodb.database);
     }
 
-    /**
-     * Close connection mongoDB
-     */
-    close()
-    {
-        mongoose.connection.close();
+    static close() {
+        mongoose.connection.close()
     }
 
     /**
-     * @param integer id
+     * @param id
      * @param callback
      */
     findBookById(id, callback)
@@ -32,6 +28,7 @@ class BookRepository {
             }
 
             var bookModel = BookRespositoryFactory.transformObjectToBook(book[0]);
+            BookRepository.close();
             callback(null, bookModel);
         });
     }
@@ -42,10 +39,11 @@ class BookRepository {
     findBooks(callback)
     {
         BookModel.find({}, function (err, books) {
-            if (err || books.length == 0) {
-                callback(new Error('Book Not Found'), null);
+            if (err) {
+                callback(new Error(err.message), null);
                 return;
             }
+            BookRepository.close();
             callback(null, books);
         }).limit(10);
     }
@@ -115,7 +113,7 @@ class BookRepository {
 
 
     /**
-     * @param array data
+     * @param data
      * @param callback
      */
     save(data, callback)
@@ -126,6 +124,7 @@ class BookRepository {
                 callback(new Error('Book not stored'), null);
                 return;
             }
+            BookRepository.close();
             callback(null, true);
         });
     }
