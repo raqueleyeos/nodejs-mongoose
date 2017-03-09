@@ -60,6 +60,7 @@ class BookRepository {
                 callback(new Error('Book Not Found'), null);
                 return;
             }
+            BookRepository.close();
             callback(null, books);
         }).limit(10);
     }
@@ -75,7 +76,7 @@ class BookRepository {
                 callback(new Error('Book not updated'), null);
                 return;
             }
-
+            BookRepository.close();
             callback(null, true);
         });
     }
@@ -91,7 +92,7 @@ class BookRepository {
                 callback(new Error('Book not updated'), null);
                 return;
             }
-
+            BookRepository.close();
             callback(null, true);
         });
     }
@@ -107,6 +108,7 @@ class BookRepository {
                 callback(new Error('Book not updated'), null);
                 return;
             }
+            BookRepository.close();
             callback(null, true);
         });
     }
@@ -140,6 +142,7 @@ class BookRepository {
                 callback(new Error('Book not updated'), null);
                 return;
             }
+            BookRepository.close();
             callback(null, true);
         });
     }
@@ -155,6 +158,7 @@ class BookRepository {
                 callback(new Error('Book not deleted'), null);
                 return;
             }
+            BookRepository.close();
             callback(null, true);
         });
     }
