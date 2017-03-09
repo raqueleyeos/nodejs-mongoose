@@ -9,7 +9,6 @@ module.exports = function(bookId, callback){
 
     var bookRepository = new BookRepository();
     bookRepository.deleteReservation(bookId, callback);
-    bookRepository.close();
 };
 
 function verifyRequestData(idReservation)
