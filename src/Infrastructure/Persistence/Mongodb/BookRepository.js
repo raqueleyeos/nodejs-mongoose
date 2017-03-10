@@ -45,7 +45,7 @@ class BookRepository {
             }
             BookRepository.close();
             callback(null, books);
-        }).limit(10);
+        });
     }
 
 
