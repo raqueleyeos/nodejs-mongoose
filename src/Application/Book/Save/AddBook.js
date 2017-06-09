@@ -12,10 +12,10 @@ module.exports = function(data, callback){
 
 function verifyRequestData(data)
 {
-    let attributes = ['id', 'name', 'author', 'pages', 'publisher'];
+    let attributes = ['id', 'title', 'author', 'pages', 'publisher'];
 
     for (let attribute of attributes) {
-        if (typeof data['attribute'] === 'undefined') {
+        if (typeof data[attribute] === 'undefined') {
             return false;
         }
     }

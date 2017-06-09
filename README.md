@@ -70,3 +70,10 @@ This example manages a small library.
     https://martinfowler.com/videos.html#data
     
     https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/
+
+
+* Utils commands to delete indexes of mongo
+
+    db.book.getIndexes();
+    
+    db.book.dropIndex({"author":1});
